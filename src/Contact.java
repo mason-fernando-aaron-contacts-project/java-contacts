@@ -2,23 +2,23 @@ import util.Input;
 
 public class Contact {
     static Input input = new Input();
-    private static String Name;
+    private String Name;
 
-    public static String getName() {
+    public String getName() {
         return Name;
     }
 
-    public static void setName(String name) {
+    public void setName(String name) {
         Name = name;
     }
 
-    private static String Number;
+    private String Number;
 
-    public static String getNumber() {
+    public String getNumber() {
         return Number;
     }
 
-    public static void setNumber(String number) {
+    public void setNumber(String number) {
         Number = number;
     }
 
@@ -26,8 +26,8 @@ public class Contact {
     }
 
     public Contact(String name, String number){
-        setNumber(number);
-        setName(name);
+        this.Name = name;
+        this.Number = number;
     }
 
 

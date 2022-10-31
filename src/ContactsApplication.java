@@ -5,6 +5,7 @@ public class ContactsApplication {
     static Path p = Paths.get("src","text", "text.txt");
 
     public static void main(String[] args) {
+
         ApplicationMethods app = new ApplicationMethods();
 
         app.promptUser();

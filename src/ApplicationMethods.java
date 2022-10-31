@@ -17,9 +17,9 @@ public class ApplicationMethods {
 
 //    static BufferedWriter write = new BufferedWriter(Writer.nullWriter());
 
-    public static ArrayList<Contact> contactsList = new ArrayList<Contact>(1);
+    public static ArrayList<Contact> contactsList = new ArrayList<Contact>();
 
-    public static Contact oldContact = new Contact();
+//    public static Contact oldContact = new Contact();
     public void promptUser() {
         Scanner scanner = new Scanner(System.in);
         String userChoice = "whatever";
@@ -80,9 +80,8 @@ public class ApplicationMethods {
 //        String usrInput = input.getString("Contact Nickname");
         String name = input.getString("Contact name");
         String number = input.getString("Contact Number");
-        oldContact = new Contact(name,number);
+       Contact newContact = new Contact(name,number);
 
-        Contact newContact = oldContact;
 
         // intermediate ArrayList of Strings
         ArrayList<String> tempArrayList = new ArrayList<>();
@@ -92,6 +91,7 @@ public class ApplicationMethods {
         String toBeAdded;
         // looping through arrayList of Contact to access properties previously set and combining them as a single string
         for(Contact contact: contactsList){
+            System.out.println(contact.getName());
             toBeAdded = contact.getName()+":"+contact.getNumber();
             tempArrayList.add(toBeAdded);
         }
