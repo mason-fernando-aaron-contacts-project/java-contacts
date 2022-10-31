@@ -1,7 +1,4 @@
-import util.Input;
-
 public class Contact {
-    static Input input = new Input();
     private String Name;
 
     public String getName() {
