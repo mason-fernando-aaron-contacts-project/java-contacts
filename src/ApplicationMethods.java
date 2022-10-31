@@ -1,6 +1,7 @@
 import util.Input;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,12 +14,9 @@ public class ApplicationMethods {
     // =================================================== Variables =======================================================
     static Input input = new Input();
     static final Path p = Paths.get("src","text", "text.txt");
-
     static String toBeAdded;
-
-    // intermediate ArrayList of Strings (tempArrayList)
     public static ArrayList<String> tempArrayList = new ArrayList<>();
-    public static ArrayList<Contact> contactsList = new ArrayList<Contact>();
+    public static ArrayList<Contact> contactsList = new ArrayList<>();
 
     // ==================================================== Methods ========================================================
     public void promptUser() {
@@ -41,19 +39,19 @@ public class ApplicationMethods {
                 case "3" -> searchContact();
                 case "4" -> deleteContact();
                 case "5" -> {
-                    System.out.println("Saving");
                     saveLines(tempArrayList);
+                    saved();
                 }
-                case "6" -> System.out.println("Goodbye");
-
+                case "6" -> goodbye();
                 default -> {
-                    System.out.println("Wrong input you Dummy");
+                    wrongInput();
                     promptUser();
                 }
             } // End Switch
         } // End While
     } // End promptUser();
 
+    // ============ CRUD ===================
     public static void viewContacts (){
 
         List<String> lines = new ArrayList<>();
@@ -63,13 +61,21 @@ public class ApplicationMethods {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         for(String contacts : lines){
-            System.out.println(contacts);
-        } // End enhanced for-loop
+            String [] arr = contacts.split(":");
+            String str1 = arr[0];
+            String strNumber = arr[1];
+            System.out.printf("""
+                     Name       | Phone number |
+                ---------------------------
+                
+                %-16s| %-15s%n
+                    
+                ---------------------------
+                --------End of List--------
+                ---------------------------
+                    """,str1,strNumber);        } // End enhanced for-loop
     } // End viewContacts();
-
-
     public static void addToContactsList(){
         // this block makes an instance of a Contact
         //  String usrInput = input.getString("Contact Nickname");
@@ -84,16 +90,7 @@ public class ApplicationMethods {
         contactsList.add(newContact);
 
         // looping through arrayList of Contact to access properties previously set and combining them as a single string
-    }
-
-    public static void writeLines (List<String>lines){
-        try {
-            Files.write(p, lines);
-        }catch (IOException e){
-            throw new RuntimeException(e);
-        }
-    }
-
+    }// End of addToContactsList
     public static void searchContact (){
         List<String> lines = new ArrayList<>();
         String userSearch = input.getString("Enter name to search:...");
@@ -107,7 +104,6 @@ public class ApplicationMethods {
             e.printStackTrace();
         }
     } // End searchContact();
-
     public static void deleteContact(){
         String toBeDeleted = input.getString("What contact would you like to delete?");
         List<String> updatedNames = new ArrayList<>();
@@ -118,7 +114,14 @@ public class ApplicationMethods {
         }
         // updatedNames is written using the writeLines function
         writeLines(updatedNames);
-    }
+    }// End of deleteContact
+    public static void writeLines (List<String>lines){
+        try {
+            Files.write(p, lines);
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
+    }// End of writeLines
 
     private static void saveLines(List<String> lines) {
         for(Contact contact: contactsList){
@@ -143,7 +146,7 @@ public class ApplicationMethods {
             throw new RuntimeException(e);
         }
         return names;
-    }
+    } // End of readLines
 
     public static String formatPhoneNum(String aNum) {
         String areaCode = null;
@@ -160,6 +163,31 @@ public class ApplicationMethods {
 
         }
         return new StringBuilder().append(areaCode).append(firstThree).append(lastFour).toString();
+    }// End of formatPhoneNum
+
+
+    // ============ user interface messages =================
+    public static void goodbye(){
+        System.out.println("""
+                            ===========================
+                            ===       Goodbye       ===
+                            ===========================
+                            """);
     }
+    public static void wrongInput(){
+        System.out.println("""
+                            ===========================
+                            ===Wrong input you Dummy===
+                            ===========================
+                            """);
+    }
+    public static void saved(){
+        System.out.println("""
+                            ===========================
+                            ===you saved your inputs===
+                            ===========================
+                            """);
+    }
+
 
 } // ApplicationMethods Class End
