@@ -62,18 +62,16 @@ public class ApplicationMethods {
         String strNumber;
         System.out.println("""
                      Name       | Phone number |
-                ---------------------------
+                ----------------+--------------+
                 """);
         for(int i = 0; i < lines.size(); i++ ){
             String [] arr = lines.get(i).split(":");
-            System.out.printf("""
-                %-16s| %-15s
-                """,arr[0],arr[1]);
+            System.out.printf(" %-15s| %-15s%n",arr[0],arr[1]);
         } // End enhanced for-loop
         System.out.println("""
-                ---------------------------
-                --------End of List--------
-                ---------------------------
+                ---------------------------------
+                -----------End of List-----------
+                ---------------------------------
                 """);
 } // End viewContacts();
     public static void addToContactsList(){
@@ -84,12 +82,8 @@ public class ApplicationMethods {
         number = formatPhoneNum(number);
         name = name.trim();
         Contact newContact = new Contact(name,number);
-
-
         // this is my array List of Contacts adding the contact that was just crated
         contactsList.add(newContact);
-
-        // looping through arrayList of Contact to access properties previously set and combining them as a single string
     }// End of addToContactsList
     public static void searchContact (){
         List<String> lines = new ArrayList<>();
