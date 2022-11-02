@@ -19,7 +19,7 @@ public class ApplicationMethods {
 
     // ============================= Methods ================================ //
     public void promptUser() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         String userChoice = "whatever";
         while (!userChoice.equals("6")) {
             System.out.println("What would you like to do");
@@ -30,9 +30,9 @@ public class ApplicationMethods {
             System.out.println("5 - Saving");
             System.out.println("6 - Exit.");
             System.out.println("Enter an option (1, 2, 3, 4, 5 or 6)");
-            userChoice = scanner.next();
+            userChoice = sc.next();
 
-            switch (userChoice) {
+            switch (userChoice){
                 case "1" -> viewContacts();
                 case "2" -> addToContactsList();
                 case "3" -> searchContact();
